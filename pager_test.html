@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>test page</title>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="kkpager_edit.min.js"></script>
+<link rel="stylesheet" type="text/css" href="kkpager_blue_edit.css" />
+</head>
+<body>
+<div style="width:800px;margin:0 auto;">
+    <div id="kkpager" class="pagers"></div>
+	<div id="kkpager2" class="pagers"></div>
+</div>
+<script type="text/javascript">
+function getParameter(name) { 
+	var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); 
+	var r = window.location.search.substr(1).match(reg); 
+	if (r!=null) return unescape(r[2]); return null;
+}
+
+//init
+$(function(){
+	var totalPage = 20;
+	var totalRecords = 390;
+	var pageNo = getParameter('pno');
+	if(!pageNo){
+		pageNo = 1;
+	}
+
+	$('#kkpager').generPageHtml({
+		pagerid: 'kkpager',
+		pno : pageNo,
+		//总页码
+		total : totalPage,
+		//总数据条数
+		totalRecords : totalRecords,
+		mode : 'click', //设置为click模式
+		//链接前部
+		hrefFormer : 'pager_test',
+		//链接尾部
+		hrefLatter : '.html',
+		click : function(n){
+			//处理完后可以手动条用selectPage进行页码选中切换
+			//this.selectPage(n);
+			//alert(n);
+			getPromotionList(n,10);
+		}
+	},true);
+
+	$('#kkpager2').generPageHtml({
+		pagerid: 'kkpager2',
+		pno : pageNo,
+		//总页码
+		total : totalPage,
+		//总数据条数
+		totalRecords : totalRecords,
+		mode : 'click', //设置为click模式
+		//链接前部
+		hrefFormer : 'pager_test',
+		//链接尾部
+		hrefLatter : '.html',
+		click : function(n){
+			//处理完后可以手动条用selectPage进行页码选中切换
+			//this.selectPage(n);
+			//alert(n);
+			getPromotionList2(n,10);
+		}
+	},true);
+	/*var a  = createPager();
+	var b  = createPager();
+	setPage(a,'kkpager',totalPage,totalRecords,pageNo);
+	setPage(b,'kkpager2',totalPage,totalRecords,pageNo);*/
+});
+
+
+
+function setPage(obj,pageId,totalPage,totalRecords,pageNo)
+{
+	if(!pageNo){
+		pageNo = 1;
+	}
+	obj.generPageHtml({
+		pagerid: pageId,
+		pno : pageNo,
+		//总页码
+		total : totalPage,
+		//总数据条数
+		totalRecords : totalRecords,
+		mode : 'click', //设置为click模式
+		//链接前部
+		hrefFormer : 'pager_test',
+		//链接尾部
+		hrefLatter : '.html',
+		click : function(n){
+			//处理完后可以手动条用selectPage进行页码选中切换
+			this.selectPage(n);
+            alert(n);
+			//getPromotionList(n,10);
+
+		}
+	},true);
+}
+
+function  getPromotionList(pageno,pagesize){
+	var totalRecords =800;
+	var totalPage = 80;
+	$('#kkpager').generPageHtml({
+		pagerid: 'kkpager',
+		pno : pageno,
+		//总页码
+		total : totalPage,
+		//总数据条数
+		totalRecords : totalRecords,
+		mode : 'click', //设置为click模式
+		//链接前部
+		hrefFormer : 'pager_test',
+		//链接尾部
+		hrefLatter : '.html',
+		click : function(n){
+			//处理完后可以手动条用selectPage进行页码选中切换
+			//this.selectPage(n);
+			//alert(n);
+			getPromotionList(n,10);
+
+		}
+	},true);
+
+}
+
+function  getPromotionList2(pageno,pagesize){
+	var totalRecords =80;
+	var totalPage = 8;
+	$('#kkpager2').generPageHtml({
+		pagerid: 'kkpager2',
+		pno : pageno,
+		//总页码
+		total : totalPage,
+		//总数据条数
+		totalRecords : totalRecords,
+		mode : 'click', //设置为click模式
+		//链接前部
+		hrefFormer : 'pager_test',
+		//链接尾部
+		hrefLatter : '.html',
+		click : function(n){
+			//处理完后可以手动条用selectPage进行页码选中切换
+			//this.selectPage(n);
+			//alert(n);
+			getPromotionList2(n,10);
+
+		}
+	},true);
+
+}
+</script>
+</body>
+</html>
